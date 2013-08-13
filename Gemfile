@@ -25,6 +25,7 @@ group :development, :test do
 end
 
 gem "activerecord", "~> 4.2.6"
+gem "airbrake", "~> 7.2"
 gem "bcrypt", "~> 3.1"
 gem "delayed_job", "~> 4.1"
 gem "delayed_job_active_record", "~> 4.1"

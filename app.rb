@@ -11,6 +11,8 @@ require "sprockets"
 require "sprockets-helpers"
 require "securerandom"
 
+require_relative "./config/airbrake_setup"
+
 require_relative "app/helpers/authentication_helpers"
 require_relative "app/repositories/user_repository"
 require_relative "config/asset_pipeline"
@@ -39,6 +41,11 @@ class Stringer < Sinatra::Base
     enable :method_override
 
     ActiveRecord::Base.include_root_in_json = false
+  end
+
+  configure :production do
+    use Airbrake::Rack::Middleware
+    enable :raise_errors
   end
 
   helpers do

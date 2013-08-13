@@ -1,6 +1,8 @@
 require "sinatra/base"
 require "sinatra/activerecord"
 
+require_relative "./config/airbrake_setup"
+
 require_relative "./app/fever_api/response"
 
 module FeverAPI
@@ -10,6 +12,11 @@ module FeverAPI
 
       register Sinatra::ActiveRecordExtension
       ActiveRecord::Base.include_root_in_json = false
+    end
+
+    configure :production do
+      use Airbrake::Rack::Middleware
+      enable :raise_errors
     end
 
     before do

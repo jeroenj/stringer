@@ -11,6 +11,9 @@ require "sinatra/activerecord/rake"
 ActiveRecord::Tasks::DatabaseTasks.db_dir = "db"
 
 require "./app"
+
+require_relative "./config/airbrake_setup"
+
 require_relative "./app/jobs/fetch_feed_job"
 require_relative "./app/tasks/fetch_feeds"
 require_relative "./app/tasks/change_password"
