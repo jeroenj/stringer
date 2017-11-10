@@ -10,12 +10,10 @@ if [ -z "$DATABASE_URL" ]; then
   exit 1
 fi
 
-: ${FETCH_FEEDS_CRON:='*/5 * * * *'}
-: ${CLEANUP_CRON:='0 0 * * *'}
+: ${FETCH_FEEDS_CRON:='*/10 * * * *'}
 
 cat <<-EOF > /app/crontab
 	$FETCH_FEEDS_CRON cd /app && bundle exec rake fetch_feeds
-	$CLEANUP_CRON cd /app && bundle exec rake cleanup_old_stories
 EOF
 
 exec /usr/bin/supervisord -c /etc/supervisord.conf
